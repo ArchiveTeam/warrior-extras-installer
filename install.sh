@@ -25,7 +25,7 @@ fi
 
 echo "Installing Python packages..."
 
-pip3 install --user --upgrade --progress-bar ascii \
+pip3 install --user --upgrade \
     requests \
     zstandard
 
