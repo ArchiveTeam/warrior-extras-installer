@@ -77,5 +77,5 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
           name: wget-at
-          path: wget-at_1.20.3~warrior0.deb
-
+          path: wget-at_1.20.3~warrior0_amd64.deb
+          if-no-files-found: error
