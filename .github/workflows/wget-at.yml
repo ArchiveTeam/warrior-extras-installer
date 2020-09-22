@@ -39,6 +39,7 @@ jobs:
           repository: archiveteam/wget-lua
           ref: "v1.20.3-at"
           submodules: false ## ./bootstrap will get the submodule
+          path: wget-lua/
       - name: configure build
         run: |
           mkdir -p ${{ github.workspace }}/build/
