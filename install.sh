@@ -30,6 +30,16 @@ pip3 install --user --upgrade \
     zstandard
 
 
+# MACHINE="`uname -m`"
+# if [ "$MACHINE" = "x86_64" ]; then
+#     ./install_wget-at_x64.sh
+# else
+#     echo "*****"
+#     echo "Sorry! wget-at for $MACHINE is not supported yet."
+#     exit 1
+# fi
+
+
 echo "$VERSION" > "${VERSION_FILE}"
 
 echo "===== Done ======"

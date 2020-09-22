@@ -1,0 +1,80 @@
+name: build-wget-at
+
+on:
+  workflow_dispatch
+
+jobs:
+  build:
+    name: Build wget-at
+    runs-on: ubuntu-18.04
+    steps:
+      - name: checkout repo
+        uses: actions/checkout@v2
+      - name: install apt dependencies
+        run: sudo apt install -y
+          build-essential
+          pkg-config
+          automake
+          autopoint
+          gettext
+          flex
+          texinfo
+          gperf
+          bzip2
+          libgnutls28-dev
+          liblua5.1-0-dev
+          zlib1g-dev
+          lua5.1
+          liblua5.1-0
+          ruby
+          ruby-dev
+          rubygems
+      - name: manual install zlib 1.4.4
+        run: ./install_zstd_x64.sh
+      - name: install fpm
+        run: sudo gem install --no-document fpm
+      - name: checkout wget-lua repo
+        uses: actions/checkout@v2
+        with:
+          repository: archiveteam/wget-lua
+          ref: "v1.20.3-at"
+          submodules: recursive
+      - name: configure build
+        run: |
+          mkdir -p {{ github.workspace }}/build/
+          ./bootstrap
+          ./configure --prefix {{ github.workspace }}/build/ --with-ssl=gnutls --disable-nls
+        working-directory: wget-lua/
+      - name: build
+        run: make
+        working-directory: wget-lua/
+      - name: install
+        run: make install
+        working-directory: wget-lua/
+      - name: alias binary
+        run: ln -s {{ github.workspace }}/build/bin/wget {{ github.workspace }}/build/bin/wget-at
+      - name: package
+        run:
+          fpm
+          -s dir
+          -t deb
+          -n wget-at
+          -v 1.20.3~warrior0
+          --depends lua5.1
+          --depends liblua5.1-0
+          --depends libzstd1
+          --depends libgnutls-openssl27
+          --depends libgnutls30
+          --depends libgnutls30
+          --depends libgnutlsxx28
+          --depends libbz2-1.0
+          --depends libgettextpo0
+          --prefix /opt/wget-at-1.20.3/
+          --chdir {{ github.workspace }}/build/
+          '.'
+      - name: upload deb artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: wget-at
+          path: wget-at_1.20.3~warrior0.deb
+
