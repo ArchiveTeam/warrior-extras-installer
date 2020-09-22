@@ -41,9 +41,9 @@ jobs:
           submodules: false ## ./bootstrap will get the submodule
       - name: configure build
         run: |
-          mkdir -p {{ github.workspace }}/build/
+          mkdir -p ${{ github.workspace }}/build/
           ./bootstrap
-          ./configure --prefix {{ github.workspace }}/build/ --with-ssl=gnutls --disable-nls
+          ./configure --prefix ${{ github.workspace }}/build/ --with-ssl=gnutls --disable-nls
         working-directory: wget-lua/
       - name: build
         run: make
@@ -52,7 +52,7 @@ jobs:
         run: make install
         working-directory: wget-lua/
       - name: alias binary
-        run: ln -s {{ github.workspace }}/build/bin/wget {{ github.workspace }}/build/bin/wget-at
+        run: ln -s ${{ github.workspace }}/build/bin/wget ${{ github.workspace }}/build/bin/wget-at
       - name: package
         run:
           fpm
@@ -70,7 +70,7 @@ jobs:
           --depends libbz2-1.0
           --depends libgettextpo0
           --prefix /opt/wget-at-1.20.3/
-          --chdir {{ github.workspace }}/build/
+          --chdir ${{ github.workspace }}/build/
           '.'
       - name: upload deb artifact
         uses: actions/upload-artifact@v2
