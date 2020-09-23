@@ -53,7 +53,8 @@ jobs:
         run: make install
         working-directory: wget-lua/
       - name: alias binary
-        run: ln -s ${{ github.workspace }}/build/bin/wget ${{ github.workspace }}/build/bin/wget-at
+        run: ln -s wget wget-at
+        working-directory: build/bin/
       - name: package
         run:
           fpm
@@ -70,6 +71,7 @@ jobs:
           --depends libgnutlsxx28
           --depends libbz2-1.0
           --depends libgettextpo0
+          --depends libpcre2-8-0
           --prefix /opt/wget-at-1.20.3/
           --chdir ${{ github.workspace }}/build/
           '.'
