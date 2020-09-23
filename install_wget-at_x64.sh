@@ -18,9 +18,9 @@ sudo apt install --fix-missing -y
 set -e
 sudo apt install --fix-broken -y
 
-echo "====="
-echo "AchiveTeam's wget built and installed sucessfully."
-echo "Advanced info:"
+echo "wget-at build ok"
 echo "Binary path: $BIN"
 $BIN --help | grep -iE "gnu|warc|lua"
+echo "====="
+echo "wget-at built and installed sucessfully!"
 echo "====="

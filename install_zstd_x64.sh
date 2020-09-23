@@ -31,3 +31,4 @@ sudo apt install --fix-broken -y
 
 echo "====="
 echo "zstd successfully installed!"
+echo "====="

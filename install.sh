@@ -2,7 +2,7 @@
 
 set -e
 
-VERSION=1
+VERSION=2
 WARRIOR_FLAG="/tmp/warrior-extras-installer-flag"
 VERSION_FILE="/tmp/warrior-extras-installer-version"
 
@@ -30,15 +30,16 @@ pip3 install --user --upgrade \
     zstandard
 
 
-# MACHINE="`uname -m`"
-# if [ "$MACHINE" = "x86_64" ]; then
-#     ./install_zstd_x64.sh
-#     ./install_wget-at_x64.sh
-# else
-#     echo "*****"
-#     echo "Sorry! wget-at for $MACHINE is not supported yet."
-#     exit 1
-# fi
+MACHINE="`uname -m`"
+if [ "$MACHINE" = "x86_64" ]; then
+    ./install_zstd_x64.sh
+    ./install_wget-at_x64.sh
+else
+    echo "*****"
+    echo "* Sorry! wget-at for $MACHINE is not supported yet."
+    echo "* The installation for wget-at has been skipped."
+    echo "*****"
+fi
 
 
 echo "$VERSION" > "${VERSION_FILE}"
