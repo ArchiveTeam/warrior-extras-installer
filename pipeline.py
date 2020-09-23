@@ -35,7 +35,7 @@ class WarningTask(Task):
             'This project will install extra software components required by other projects.')
         item.log_output('It is intended to be run within a Warrior VM appliance or Warrior Docker container. '
                         'Press CTRL+C to cancel.')
-        item.log_output('Update will continue in 5 seconds...')
+        item.log_output('Update will continue in 10 seconds...')
 
         IOLoop.instance().add_timeout(
             datetime.timedelta(seconds=10),

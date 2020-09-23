@@ -32,6 +32,16 @@ pip3 install --user --upgrade \
 
 MACHINE="`uname -m`"
 if [ "$MACHINE" = "x86_64" ]; then
+
+    CODENAME="`lsb_release --codename --short`"
+    if [ "$CODENAME" = "xenial" ]; then
+        echo "*****"
+        echo "* The packages are not compatible with this Ubuntu release ($CODENAME)."
+        echo "* Please install an updated Warrior VM appliance or Docker container."
+        echo "*****"
+        exit 1
+    fi
+
     ./install_zstd_x64.sh
     ./install_wget-at_x64.sh
 else
