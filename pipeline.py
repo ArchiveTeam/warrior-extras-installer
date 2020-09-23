@@ -14,7 +14,11 @@ project = Project(
         <img class="project-logo" alt=""
             src="https://tracker.archiveteam.org/~chfoo/image/200px-Applications-system.svg.png"
             height="50" />
-        <h2>Warrior Extras Installer</h2>
+        <h2>Warrior Extras Installer
+            <span class="links">
+                <a href="https://github.com/ArchiveTeam/warrior-extras-installer">source code</a>
+            <span>
+        </h2>
         <p>Select this project, when required, to install extra software components required by other projects.</p>
         '''
 )
