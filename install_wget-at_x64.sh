@@ -3,8 +3,8 @@
 set -e
 
 CURL_OPTS="--connect-timeout 60 --retry 5 --retry-delay 20 --fail"
-WGET_DEB="wget-at-1.20.3~warrior0_amd64.deb"
-BIN="/opt/wget-at-1.20.3/wget-at"
+WGET_DEB="wget-at_1.20.3~warrior0_amd64.deb"
+BIN="/opt/wget-at-1.20.3/bin/wget-at"
 
 echo "Install of wget-at will now begin. "
 
@@ -14,18 +14,9 @@ curl ${CURL_OPTS} \
 
 set +e
 sudo dpkg -i ${WGET_DEB}
-EXIT_STATUS=$?
+sudo apt install --fix-missing -y
 set -e
-
-if [ $EXIT_STATUS -ne 0 ]; then
-    echo "Failed to install package, cleaning up..."
-    sudo dpkg -r wget-at
-    echo "*****"
-    echo "wget-at failed to install!"
-    exit 1
-fi
-
-sudo apt install -f
+sudo apt install --fix-broken -y
 
 echo "====="
 echo "AchiveTeam's wget built and installed sucessfully."

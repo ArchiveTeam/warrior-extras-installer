@@ -32,6 +32,7 @@ pip3 install --user --upgrade \
 
 # MACHINE="`uname -m`"
 # if [ "$MACHINE" = "x86_64" ]; then
+#     ./install_zstd_x64.sh
 #     ./install_wget-at_x64.sh
 # else
 #     echo "*****"

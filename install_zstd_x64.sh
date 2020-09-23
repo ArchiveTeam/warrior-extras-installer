@@ -8,7 +8,7 @@ LIBZSTD_DEB="libzstd1_1.4.4+dfsg-3_amd64.deb"
 LIBZSTD_DEV_DEB="libzstd-dev_1.4.4+dfsg-3_amd64.deb"
 
 echo "Fixing any existing apt issues..."
-sudo apt install -f -y
+sudo apt install --fix-broken -y
 
 echo "Preinstalling old versions..."
 sudo apt install -y zstd libzstd1 libzstd-dev
@@ -25,8 +25,9 @@ echo "Installing new versions..."
 
 set +e
 sudo dpkg -i ${ZSTD_DEB} ${LIBZSTD_DEB} ${LIBZSTD_DEV_DEB}
+sudo apt install --fix-missing -y
 set -e
-sudo apt install -f -y
+sudo apt install --fix-broken -y
 
 echo "====="
 echo "zstd successfully installed!"
