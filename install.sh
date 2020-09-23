@@ -38,12 +38,12 @@ if [ "$MACHINE" = "x86_64" ]; then
         echo "*****"
         echo "* The packages are not compatible with this Ubuntu release ($CODENAME)."
         echo "* Please install an updated Warrior VM appliance or Docker container."
+        echo "* The installation for wget-at has been skipped."
         echo "*****"
-        exit 1
+    else
+        ./install_zstd_x64.sh
+        ./install_wget-at_x64.sh
     fi
-
-    ./install_zstd_x64.sh
-    ./install_wget-at_x64.sh
 else
     echo "*****"
     echo "* Sorry! wget-at for $MACHINE is not supported yet."
