@@ -29,7 +29,7 @@ jobs:
           ruby
           ruby-dev
           rubygems
-      - name: manual install zlib 1.4.4
+      - name: manual install zstd 1.4.4
         run: ./install_zstd_x64.sh
       - name: install fpm
         run: sudo gem install --no-document fpm
